@@ -364,15 +364,37 @@ def addEstoque(lstQtd):
             print('-------------------------------------------------------------------------------------------------------------------------------------------------------------')
 def guardaTxt(lstModelo, lstCor, lstNumeracao, lstQtd, lstValorUnit):
     file1 = open("sapataria_dados.txt","w")
- 
+    ind = 0    
+
+### primeira forma    
+##    for x in range(len(lstModelo)):
+##        file1.write(' '+str(ind).center(5,' ')+ \
+##              lstModelo[x].center(23,' ')+ \
+##              str(lstNumeracao[x]).center(2,' ')+ \
+##              str(lstQtd[x]).center(2,' ')+ \
+##              str(lstValorUnit[x]).center(15,' ')+ \
+##              lstCor[x].center(15,' ')+'\n')
+##        ind += 1
+
     for x in range(len(lstModelo)):
-        file1.write(str(lstModelo[x])+' '+str(lstNumeracao[x])+' '+str(lstQtd[x])+' ' \
-                    +str(lstValorUnit[x])+' '+str(lstCor[x])+'\n')
-        
+        file1.write(lstModelo[x]+'\n')
+        file1.write(str(lstNumeracao[x])+'\n')
+        file1.write(str(lstQtd[x])+'\n')
+        file1.write(str(lstValorUnit[x])+'\n')
+        file1.write(lstCor[x]+'\n')        
+        ind += 1
+
+    
     file1.close()
 #################################################################################
 def recuperaTxt(lstModelo, lstCor, lstNumeracao, lstQtd, lstValorUnit):
-    dados = open('sapataria_dados.txt', 'r')    
+    dados = open('sapataria_dados.txt', 'r')
+##    x = 0
+##    for line in dados:
+##        print(line[x])
+##        x+=1
+##    dados.read()
+    
     x = 0
     for linha in dados:
         linha = linha.rstrip()
@@ -387,10 +409,21 @@ def recuperaTxt(lstModelo, lstCor, lstNumeracao, lstQtd, lstValorUnit):
         if x == 3:
             lstValorUnit.append(int(linha))
         if x == 4:
-            lstCor.append(linha)            
+            lstCor.append(linha)
+            
+            
         x+=1
     dados.close()
-
+        
+##        print(dados.readline())
+##        dados.readline(dados.write(lstModelo[x]))
+##        dados.write(str(lstNumeracao[x]))
+##        dados.write(str(lstQtd[x]))
+##        dados.write(str(lstValorUnit[x]))
+##        dados.write(lstCor[x])        
+##        x += 1
+    
+#                      lstCor.append(listaCorExemplo[escolha])
 # list( ) # transforma em lista
 # eval( ) # transforma em lista analisando melhor
 ###  Execução ######################################################################
