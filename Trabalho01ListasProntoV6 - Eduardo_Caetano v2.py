@@ -1,5 +1,7 @@
 # Trabalho 01 - Utilizando Listas
 # Autor:  Eduardo Caetano
+# atualizar preço por modelo
+# se ja houver no dicionario
 
 '''
 Descrição do trabalho:
@@ -40,26 +42,55 @@ Na opção 3, você deverá realizar uma venda.
 Na opção 4, você deverá localizar um produto e atualizar seu preço.
             Exemplo:
                 Produto: Tradicional
-                Quantidade: 8   Cor: Branca   (informar esses dados)
+                Quantidade: 8   Cor: Branca   (informar e {Esportivo      23         5 }sses dados)
                 Novo Preço: 110.00            (digitar)
 
 Na opção 5, você deverá cadastrar as cores para poder escolher na hora de 
             cadastrar o estoque.
+
+            dados_dic = {}
+
+
+            a = input()
+
+            chave = (a + ' '+ b +' '+ c)
+
+             preco = input()
+            quant = input()
+
+            
+
+            lista_dados =[]
+
+            lista_dados.append(preco )
+            lista_dados.append(quant )
+            
+    
+            dados = {chave : lista_dados}            
+
+           
+            dados_dic.apend(dados)
+
+            [{'Esportivo - 23 - preto' : [120.00   , 5]}]
+
+
+            
 '''
 
 ###### variaveis e listas  ###################################################################
 # Imports
 import os
 import sys
+import struct
 
 ### Listas vazias 
 sapataria = list()
 
 ### Listas com dados
-#sapataria = [{'Modelo': 'Caminhada', 'Numeração': 40, 'Quantidade': 100, 'Valor': 1000, 'Cor': 'Vermelho'},
-#                    {'Modelo': 'Esportivo', 'Numeração': 42, 'Quantidade': 50, 'Valor': 300, 'Cor': 'Amarelo'},
-#                    {'Modelo': 'Corrida', 'Numeração': 44, 'Quantidade': 20, 'Valor': 150, 'Cor': 'Branco'},
-#                    {'Modelo': 'Tradicional', 'Numeração': 44, 'Quantidade': 20, 'Valor': 150, 'Cor': 'Branco'}]
+##sapataria = [{'Modelo': 'Caminhada', 'Numeração': 40, 'Quantidade': 100, 'Valor': 1000, 'Cor': 'Vermelho'},
+##                    {'Modelo': 'Esportivo', 'Numeração': 42, 'Quantidade': 50, 'Valor': 300, 'Cor': 'Amarelo'},
+##                    {'Modelo': 'Corrida', 'Numeração': 44, 'Quantidade': 20, 'Valor': 150, 'Cor': 'Branco'},
+##                    {'Modelo': 'Tradicional', 'Numeração': 44, 'Quantidade': 20, 'Valor': 150, 'Cor': 'Branco'}]
 
 # listas de exemplo
 listaModeloExemplo = ('Tradicional','Esportivo','Caminhada','Corrida')
@@ -68,7 +99,7 @@ listaCorExemplo = ['Branco','Azul','Amarelo','Vermelho']
 # Variaveis
 sapato = dict()
 depoisDeAdicionadoNoEstoque = False
-
+jaExiste = False
 
 
 def menu():
@@ -95,38 +126,36 @@ def lerInteiro(mens):
         except:
             input('...Erro. Você não digitou um número inteiro.')
 
-### Função para mostrar a lista (Relatorio) ####################################################
+### Função para mostrar a lista ou seja relatorio ( Opção 2 ) ####################################################
 def mostraLista(sapataria):
     espaco = '  '
     x = 0
     ind = 0
-    print('Item    Modelo       Numeração  Quantidade      Valor                Cor')
-    for item in sapataria:
-        for k, v in item.items():
-            if(x == 0):
-                print('  '+str(ind)+'     ',end='')
-                ind += 1
-            if(x % 5 == 0 and x != 0):
-                print('  '+str(ind)+'     ',end='')
-                ind += 1
-            
-            if(v == 'Caminhada'):
-                espaco = '             '
-            if(v == 'Esportivo'):
-                espaco = '                '
-                
-            if(v == 'Corrida'):
-                espaco = '                 '
-            if(v == 'Tradicional'):
-                espaco = '              '
+    print('Item    Modelo       Numeração  Quantidade       Valor             Cor')
+    for x in range(len(sapataria)):
 
-                
-            print(f'{v}',end=espaco)
-            x+=1
+        if sapataria[x]['Modelo'] == 'Tradicional':
+            # Tradicional
+            espaco = 18
+            espaco2 = 20
             
-        print()
+        if sapataria[x]['Modelo'] == 'Esportivo':
+            # Esportivo
+            espaco = 19
+            espaco2 = 20
+            
+        if sapataria[x]['Modelo'] == 'Corrida':
+            # Corrida
+            espaco = 20
+            espaco2 = 20
+            
+        if sapataria[x]['Modelo'] == 'Caminhada':
+            # Caminhada
+            espaco = 15
+            espaco2 = 19
 
-# print(' '+str(ind).center(5,' ')+lstModelo[x].center(23,' ')+str(lstNumeracao[x]).center(espaco,' ')+str(lstQtd[x]).center(espaco2,' ')+str(lstValorUnit[x]).center(15,' ')+lstCor[x].center(15,' '))
+        print('   '+str(x).ljust(7,' ')+sapataria[x]['Modelo'].ljust(espaco,' ')+str(sapataria[x]['Numeração']).ljust(espaco2,' ')+
+                    str(sapataria[x]['Quantidade']).ljust(espaco2,' ')+str(sapataria[x]['Valor']).ljust(15,' ')+sapataria[x]['Cor'].ljust(15,' '))
         
 ### mostra a lista de exemplo ##############################################################
 def mostraListaExemplo(listaExemplo):
@@ -139,27 +168,75 @@ def mostraListaExemplo(listaExemplo):
 ### Funcção que efetua o cadastro  ######################################################### 
 def cadastroTotal():
     resposta = 'S'
+    jaExiste
+    
+    cadastroModelo(sapataria)
+    if jaExiste == False:
+        cadastroNumeracao(sapataria)
+        cadastroQuantidade(sapataria)
+        cadastroValor(sapataria)
+        cadastroCor(sapataria)
+        sapataria.append(sapato.copy())
+        
+    print('----------------------------------------------------------------------------------------------------------------------------')
+    resposta = str(input(' [ s = SIM // n = NÃO ]\nDeseja verificar outro: '))
 
+    if(resposta.upper() == 'N' ):
+        print()
+        print('---------------------------------- LISTA ATUALIZADA --------------------------------------------------------')
+        mostraLista(sapataria)
+        
+        
+### Função que cadastra o modelo na lista #########################################################################
+def cadastroModelo(sapataria):
+    global jaExiste
+    jaExiste = False
     while(True):
         while(True):
-            mostraListaExemplo(listaModeloExemplo)
-            modelo  = lerInteiro('Digite o numero do modelo do tenis\nda lista que deseja adicionar: ')
-            if(modelo > 0 and modelo < 4):
-                sapato['Modelo'] = str(listaModeloExemplo[modelo])
-                break
-            else:
-                print('\n----------------------------------------------------------------------------------------------------------------------------')
-                print('---------------------------------------------    Erro!  -----------------------------------------------------------------')
-                print('---------------------------------- Numero digitado errado! -------------------------------------------------')
-                print('----------------------------------------------------------------------------------------------------------------------------\n')
+            if(jaExiste == False):
+                print('\n-------- Modelo --------')
+                mostraListaExemplo(listaModeloExemplo)
+                modelo  = lerInteiro('Digite o numero do modelo do tenis\nda lista que deseja adicionar: ')
+                if(modelo >= 0 and modelo <= 3):
+                    for x in range(len(sapataria)):
+                        print('x: ',x,' sapataria[x][Modelo]: ',sapataria[x]['Modelo'])
+                        
+                        if listaModeloExemplo[modelo] == sapataria[x]['Modelo']:
+                            jaExiste = True
+                            print(' ------------------------------------------------------------------------')
+                            print('----------------- Esse modelo ja existe! ------------------')
+                            print(' Você deseja adicionar mais no desse modelo')
+                            print(' no estoque ou quer adicionar outro novo?')
+                            print(' ------------------------------------------------------------------------')
+                            print(' [  1 - Novo  ou  2 - Adicionar mais estoque  ] ')
 
-        ##########################################################################
+                            escolhaEstoque = lerInteiro(' ')
+                            if escolhaEstoque == 2:
+                                adicionarMaisQuantidade(sapataria, modelo, x)
+                                jaExiste = True
+                                break
+                            if escolhaEstoque == 1:
+                                sapato['Modelo'] = str(listaModeloExemplo[modelo])
+                                break
+                            break
+                        
+                else:
+                    print('\n----------------------------------------------------------------------------------------------------------------------------')
+                    print('---------------------------------------------    Erro!  -----------------------------------------------------------------')
+                    print('---------------------------------- Numero digitado errado! -------------------------------------------------')
+                    print('----------------------------------------------------------------------------------------------------------------------------\n')
+
+            break
+        break
+    
+### Função que cadastra a numeração na lista #######################################################################
+def cadastroNumeracao(sapataria):
         if depoisDeAdicionadoNoEstoque == True:
             print('')
         else:
             # valida numeração
             while True:
-                print('\n-------- Numeracao --------')
+                print('\n--------------------- Numeracao -------------------------')
                 numeracao = lerInteiro('Digite a numeracao do tenis [ 22 - 46]: ') 
                 if numeracao >= 22 and numeracao <= 46 :
                     sapato['Numeração'] = numeracao
@@ -171,17 +248,15 @@ def cadastroTotal():
                     print('--------------------------- Digite novamento um Numero! ----------------------------------------------')
                     print('----------------------------------------------------------------------------------------------------------------------------\n')
 
-                    
-                    
         
-        
-    ##########################################################################
+### Função que cadastra a quantidade na lista #######################################################################
+def cadastroQuantidade(sapataria):
         if depoisDeAdicionadoNoEstoque == True:
             print('')
         else:
             # valida Quantidade
             while True:
-                print('\n-------- Quantidade --------')                
+                print('\n--------------------- Quantidade -------------------------')                
                 quantidade = lerInteiro('Digite a quantidade de tenis: ') 
                 if quantidade == 0 or quantidade < 0 or quantidade > 500:
                     print('\n----------------------------------------------------------------------------------------------------------------------------')
@@ -193,13 +268,14 @@ def cadastroTotal():
                     break
             
         
-    ##########################################################################
+### Função que cadastra o valor na lista #######################################################################
+def cadastroValor(sapataria):
         if depoisDeAdicionadoNoEstoque == True:
             print('')
         else:
             # valida Valor
             while True:
-                print('\n-------- Valor --------')
+                print('\n------------------------- Valor ------------------------------')
                 valor = lerInteiro('Digite o valor do tenis: ') 
                 if valor <= 10 or valor > 5000:
                     print('\n----------------------------------------------------------------------------------------------------------------------------')
@@ -211,9 +287,11 @@ def cadastroTotal():
                     sapato['Valor'] = valor
                     break  
 
-     ##########################################################################
+### Função que cadastra a cor na lista #######################################################################
+def cadastroCor(sapataria):
         print()
         while(True):
+            print('\n--------------------------- Cor -------------------------------')
             mostraListaExemplo(listaCorExemplo)
             cor  = lerInteiro('Digite o numero da cor do tenis\nda lista que deseja adicionar: ')        
             if(cor >= 0 and cor < len(listaCorExemplo)):
@@ -224,21 +302,9 @@ def cadastroTotal():
                 print('---------------------------------------------    Erro!  -----------------------------------------------------------------')
                 print('---------------------------------- Numero digitado errado! -------------------------------------------------')
                 print('----------------------------------------------------------------------------------------------------------------------------\n')
+        print('----------------------------------------------------------------')
 
-
-
-        sapataria.append(sapato.copy())
-                
-        print('')
-        resposta = str(input(' [ s = SIM // n = NÃO ]\nDeseja verificar outro: '))
-
-        if(resposta.upper() == 'N' ):
-            print()
-            print('---------------------------------- LISTA ATUALIZADA --------------------------------------------------------')
-            mostraLista(sapataria)
-            break
-
-### Relatorio ##############################################################################
+### Relatorio ( Opção 3 )##############################################################################
 def relatorioGeral(sapataria):
     if len(sapataria) != 0:
         mostraLista(sapataria)
@@ -362,7 +428,18 @@ def cadastrarCores(listaCorExemplo):
             mostraListaExemplo(listaCorExemplo)
             break
 
-#################################################################################
+### Função para adicionara mais sapatos no estoque se caso já existir ##################
+def adicionarMaisQuantidade(sapataria, modelo, x):
+    while True:
+        
+        quantidadeAdd = lerInteiro('\nQuanto deseja adicionar: ')
+        if quantidadeAdd <= 0 and quantidadeAdd>500:
+            print('Numero deve ser maior que 0 (Zero) e menor que 500 (Quientos)')
+        else:
+            sapataria[x]['Quantidade'] = (quantidadeAdd + sapataria[x]['Quantidade'])
+            break
+        
+####Função que armazena o conteudo da lista em um arquivo TXT ########################
 def guardaTxt(sapataria):
     if(len(sapataria) != 0):
         fileName = input('\nQual o nome do banco de dados deseja exportar?\nOu tecle [ENTER] para usar a padrão ')
@@ -398,7 +475,7 @@ def guardaTxt(sapataria):
     else:
         print('\nNão existe item nas listas para armazenar no txt!\n')
 
-#################################################################################
+### Função que pega os dados de um txt e coloca na lista ###########################################################
 def recuperaTxt(sapataria):
     sapato = dict()
     fileName = input('\nQual o nome do banco de dados deseja importar?\nOu tecle [ENTER] para usar a padrão ')
@@ -422,7 +499,7 @@ def recuperaTxt(sapataria):
         #Quebra a linha lida em uma lista, a cada espaço encontrado é gerado um item na lista
         sapato_item = line.strip().split(' ')
         
-        sapato['Modelo']       = str(sapato_item[0])
+        sapato['Modelo']        = str(sapato_item[0])
         sapato['Numeração'] = int(sapato_item[1])
         sapato['Quantidade'] = int(sapato_item[2])
         sapato['Valor']           = str(sapato_item[3])
@@ -434,7 +511,9 @@ def recuperaTxt(sapataria):
     print('--------------------------- Importado do TXT com sucesso! --------------------------------------------')
     print('---------------------------------------------------------------------------------------------------------------------------\n')
     dados.close()
-        
+
+
+       
 ###  Execução ######################################################################
 while True:
     escolha = lerInteiro(menu())
@@ -469,7 +548,6 @@ while True:
         print('----- Opcao 4 - Atualizar preços -----')
         print('----------------------------------------------------------------------------------------------------------------------------------')
         atulizaPreco(sapataria)
-
         
     elif escolha == 5:
         print('\n----------------------------------------------------------------------------------------------------------------------------------')
@@ -492,7 +570,7 @@ while True:
     else:
         print('Item do menu inexistente')
 
-
+##########  Daqui pra baixo não ha mais nada! #######################################################
 
 
 
