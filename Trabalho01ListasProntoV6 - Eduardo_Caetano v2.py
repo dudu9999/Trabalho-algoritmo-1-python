@@ -50,13 +50,16 @@ Na opção 5, você deverá cadastrar as cores para poder escolher na hora de
 ###### variaveis e listas  ###################################################################
 # Imports
 import os
-
-### Listas com dados
-#
-#lstNumeracao, lstQtd, lstValorUnit = [42,40,45,39],[20,10,25,15],[500,200,600,400]
+import sys
 
 ### Listas vazias 
 sapataria = list()
+
+### Listas com dados
+#sapataria = [{'Modelo': 'Caminhada', 'Numeração': 40, 'Quantidade': 100, 'Valor': 1000, 'Cor': 'Vermelho'},
+#                    {'Modelo': 'Esportivo', 'Numeração': 42, 'Quantidade': 50, 'Valor': 300, 'Cor': 'Amarelo'},
+#                    {'Modelo': 'Corrida', 'Numeração': 44, 'Quantidade': 20, 'Valor': 150, 'Cor': 'Branco'},
+#                    {'Modelo': 'Tradicional', 'Numeração': 44, 'Quantidade': 20, 'Valor': 150, 'Cor': 'Branco'}]
 
 # listas de exemplo
 listaModeloExemplo = ('Tradicional','Esportivo','Caminhada','Corrida')
@@ -64,44 +67,430 @@ listaCorExemplo = ['Branco','Azul','Amarelo','Vermelho']
 
 # Variaveis
 sapato = dict()
-escolha, quntidadeVenda, precoAtual, numeracao, valor, quantidade = 0, 0, 0, 0, 0, 0
-modelo, cor, resposta = '','',''
 depoisDeAdicionadoNoEstoque = False
 
 
 
-resposta = 'S'
+def menu():
+    menu ='''
+------------------------------------------------------------------
+    Menu
+    0-  Sair
+    1-  Cadastrar Tenis
+    2-  Relatório Geral
+    3-  Realizar Venda
+    4-  Atualizar preços
+    5-  Cadastrar Cores
+    6-  Guarda no TXT
+    7-  Recupera do TXT
+    Escolha: '''
+    return menu
 
-while(True):
-    sapato['Modelo'] = str(input('Modelo: '))
-    sapato['Cor'] = str(input('Cor: '))
-    sapato['Numeração'] = str(input('Numeração: '))
-    sapato['Quantidade'] = str(input('Quantidade: '))
-    sapato['Valor'] = str(input('Valor: '))
-    print('')
+### Função para ler um inteiro ##############################################################
+def lerInteiro(mens): 
+    while True:
+        try:
+            n = int(input(mens))            
+            return n
+        except:
+            input('...Erro. Você não digitou um número inteiro.')
 
-    sapataria.append(sapato)
+### Função para mostrar a lista (Relatorio) ####################################################
+def mostraLista(sapataria):
+    espaco = '  '
+    x = 0
+    ind = 0
+    print('Item    Modelo       Numeração  Quantidade      Valor                Cor')
+    for item in sapataria:
+        for k, v in item.items():
+            if(x == 0):
+                print('  '+str(ind)+'     ',end='')
+                ind += 1
+            if(x % 5 == 0 and x != 0):
+                print('  '+str(ind)+'     ',end='')
+                ind += 1
+            
+            if(v == 'Caminhada'):
+                espaco = '             '
+            if(v == 'Esportivo'):
+                espaco = '                '
+                
+            if(v == 'Corrida'):
+                espaco = '                 '
+            if(v == 'Tradicional'):
+                espaco = '              '
 
-
-    print('--- For no DIcionario ---')
-    for x in range(len(sapataria)):
-        for k, v in sapato.items():
-            print(f'O item {k} tem o valor de: {v}.')
+                
+            print(f'{v}',end=espaco)
+            x+=1
+            
         print()
 
-    print('')
-    print('--- For na lista ---')
-    for x in range( len(sapataria)):
-        print(sapataria[x])
+# print(' '+str(ind).center(5,' ')+lstModelo[x].center(23,' ')+str(lstNumeracao[x]).center(espaco,' ')+str(lstQtd[x]).center(espaco2,' ')+str(lstValorUnit[x]).center(15,' ')+lstCor[x].center(15,' '))
         
+### mostra a lista de exemplo ##############################################################
+def mostraListaExemplo(listaExemplo):
+    ind = 0
+    for x in listaExemplo:
+        print('  '+str(ind)+' - '+listaExemplo[ind])
+        ind += 1
     print('')
-    resposta = str(input("Deseja verificar outro: "))
 
-    if(resposta.upper() == 'N' ):
+### Funcção que efetua o cadastro  ######################################################### 
+def cadastroTotal():
+    resposta = 'S'
+
+    while(True):
+        while(True):
+            mostraListaExemplo(listaModeloExemplo)
+            modelo  = lerInteiro('Digite o numero do modelo do tenis\nda lista que deseja adicionar: ')
+            if(modelo > 0 and modelo < 4):
+                sapato['Modelo'] = str(listaModeloExemplo[modelo])
+                break
+            else:
+                print('\n----------------------------------------------------------------------------------------------------------------------------')
+                print('---------------------------------------------    Erro!  -----------------------------------------------------------------')
+                print('---------------------------------- Numero digitado errado! -------------------------------------------------')
+                print('----------------------------------------------------------------------------------------------------------------------------\n')
+
+        ##########################################################################
+        if depoisDeAdicionadoNoEstoque == True:
+            print('')
+        else:
+            # valida numeração
+            while True:
+                print('\n-------- Numeracao --------')
+                numeracao = lerInteiro('Digite a numeracao do tenis [ 22 - 46]: ') 
+                if numeracao >= 22 and numeracao <= 46 :
+                    sapato['Numeração'] = numeracao
+                    break
+                else:
+                    print('\n----------------------------------------------------------------------------------------------------------------------------')
+                    print('---------------------------------------------    Erro!  -----------------------------------------------------------------')
+                    print('---------------------- digite um numero no intervalo de 22 ate 48 -------------------------------')
+                    print('--------------------------- Digite novamento um Numero! ----------------------------------------------')
+                    print('----------------------------------------------------------------------------------------------------------------------------\n')
+
+                    
+                    
+        
+        
+    ##########################################################################
+        if depoisDeAdicionadoNoEstoque == True:
+            print('')
+        else:
+            # valida Quantidade
+            while True:
+                print('\n-------- Quantidade --------')                
+                quantidade = lerInteiro('Digite a quantidade de tenis: ') 
+                if quantidade == 0 or quantidade < 0 or quantidade > 500:
+                    print('\n----------------------------------------------------------------------------------------------------------------------------')
+                    print('---------------------------------------------    Erro!  -----------------------------------------------------------------')
+                    print('---------------------- Quantidade muito alta ou muito baixa ----------------------------------------')
+                    print('----------------------------------------------------------------------------------------------------------------------------\n')
+                else:
+                    sapato['Quantidade'] = quantidade 
+                    break
+            
+        
+    ##########################################################################
+        if depoisDeAdicionadoNoEstoque == True:
+            print('')
+        else:
+            # valida Valor
+            while True:
+                print('\n-------- Valor --------')
+                valor = lerInteiro('Digite o valor do tenis: ') 
+                if valor <= 10 or valor > 5000:
+                    print('\n----------------------------------------------------------------------------------------------------------------------------')
+                    print('---------------------------------------------    Erro!  -----------------------------------------------------------------')
+                    print('------------------------ Valor não digitado ou muito grande -----------------------------------------')
+                    print('----------------------------------------------------------------------------------------------------------------------------\n')
+                    
+                else:
+                    sapato['Valor'] = valor
+                    break  
+
+     ##########################################################################
+        print()
+        while(True):
+            mostraListaExemplo(listaCorExemplo)
+            cor  = lerInteiro('Digite o numero da cor do tenis\nda lista que deseja adicionar: ')        
+            if(cor >= 0 and cor < len(listaCorExemplo)):
+                sapato['Cor'] = str(listaCorExemplo[cor])
+                break
+            else:
+                print('\n----------------------------------------------------------------------------------------------------------------------------')
+                print('---------------------------------------------    Erro!  -----------------------------------------------------------------')
+                print('---------------------------------- Numero digitado errado! -------------------------------------------------')
+                print('----------------------------------------------------------------------------------------------------------------------------\n')
+
+
+
+        sapataria.append(sapato.copy())
+                
+        print('')
+        resposta = str(input(' [ s = SIM // n = NÃO ]\nDeseja verificar outro: '))
+
+        if(resposta.upper() == 'N' ):
+            print()
+            print('---------------------------------- LISTA ATUALIZADA --------------------------------------------------------')
+            mostraLista(sapataria)
+            break
+
+### Relatorio ##############################################################################
+def relatorioGeral(sapataria):
+    if len(sapataria) != 0:
+        mostraLista(sapataria)
+        print('\n----------------------------------------------------------------------------------------------------------------------------------')
+        print('          Total em Estoque R$:',total(sapataria))
+        print('O tenis de ID:',possuiMais(sapataria),' é o que possui ',round(calculaPrecent(sapataria)),'% de todo o estoque!')
+        print('E só o tenis de ID:',possuiMais(sapataria),' que esta parado, possui o valor de  R$',int(sapataria[possuiMais(sapataria)]['Quantidade'])*int(sapataria[possuiMais(sapataria)]['Valor']),' de prejuizo!')
+        print('----------------------------------------------------------------------------------------------------------------------------------\n')
+    else:
+        print('\nLista vazia!')
+
+### Função que calcula o total #############################################################
+def total(sapataria):
+    somaTotal = 0
+    ind = 0
+    for x in sapataria:
+        somaTotal = somaTotal + ( int(sapataria[ind]['Valor']) * int(sapataria[ind]['Quantidade'] ))
+        ind+=1
+    return somaTotal
+
+### Função para calcular o percentual #######################################################
+def calculaPrecent(sapataria):
+    per = 0
+    ind = 0
+    for x in sapataria:
+        per = per + sapataria[ind]['Quantidade'] 
+        ind+=1
+    per = (100*(sapataria[possuiMais(sapataria)
+                          ]['Quantidade'] / per))
+    return per
+
+### Função para mostrar qual tenis possui mais em estoque ######################################
+def possuiMais(sapataria):
+    ind = 0
+    val_Atual = 0
+    indMaior = 0
+    for x in sapataria:
+        if sapataria[ind]['Quantidade'] > val_Atual:
+            val_Atual = sapataria[ind]['Quantidade']
+            indMaior = ind
+        ind+=1
+    return indMaior # valor do indice do que possui mais no estoque
+
+### Realizar Venda ##############################################################################
+def realizarVenda(sapataria):
+    if len(sapataria) != 0:
+        mostraLista(sapataria)
+        while True:
+            print()
+            escolha  = lerInteiro('Escolha um para vender: ')
+            if escolha > (len(sapataria)-1) or escolha < 0:
+                    print('Item escolhido fora da lista!\n digite o numero de um iten  que esteja na  lista!')
+            else:
+                print()
+                quntidadeVenda  = lerInteiro('Quantos voce deseja vender: ')
+                if quntidadeVenda > sapataria[escolha]['Quantidade'] or quntidadeVenda <= 0:
+                        print('Voce nao tem essa quantidade ou valor digitado esta errado!')
+                else:
+                    sapataria[escolha]['Quantidade'] = sapataria[escolha]['Quantidade'] - quntidadeVenda
+                    if sapataria[escolha]['Quantidade'] == 0:
+                        limpaItem(sapataria, escolha)
+
+                    print('\n---------------------------------------------------------------------------------------------------------------------------')
+                    print('--------------------------- Venda realisada com sucesso -----------------------------------------------')
+                    print('---------------------------------------------------------------------------------------------------------------------------\n')
+                    
+                    print('---------------------------------- LISTA ATUALIZADA --------------------------------------------------------')
+                    mostraLista(sapataria)
+                    print('---------------------------------------------------------------------------------------------------------------------------')
+
+                    break
+        else:
+            print('\nLista vazia!')
+
+### Função que se nao houver nenhum tenis no estoque entao remove o tenis #######################
+def limpaItem(sapataria, escolha):
+    sapataria.pop(escolha)
+
+### Função para atualizar o preço (Opção 4) ################################################
+def atulizaPreco(sapataria):        
+        if len(sapataria) != 0:
+            mostraLista(sapataria)
+            while True:
+                print()
+                escolha  = lerInteiro('Digite o numero de um item que deseja atualizar o preco:  ')
+
+                if escolha > (len(sapataria)-1) or escolha < 0:
+                    print('---------------------------------------------------------------------------------------------------------------------------')
+                    print('--------------------------- Item escolhido fora da lista! --------------------------------------------------')
+                    print('--------------- digite o numero de um iten  que esteja na  lista! ------------------------------')
+                    print('---------------------------------------------------------------------------------------------------------------------------\n')
+                else:
+                    print()
+                    precoAtual  = lerInteiro('Qual o valor atualizado que deseja inserir:  ')
+                    if precoAtual <= 0 or precoAtual > 10000:
+                        print()
+                        print('Esse preco é muito elevado ou valor digitado esta errado!')
+                    else:
+                        sapataria[escolha]['Valor'] = precoAtual
+                        print('\n---------------------------------------------------------------------------------------------------------------------------')
+                        print('--------------------------- Preço atualizado com sucesso ----------------------------------------------')
+                        print('---------------------------------------------------------------------------------------------------------------------------\n')
+                        
+                        print('---------------------------------- LISTA ATUALIZADA --------------------------------------------------------')
+                        mostraLista(sapataria)
+                        break
+        else:
+            print('\nLista vazia!')
+
+### Função para cadastrar cores ( Opção 5 ) ###############################################
+def cadastrarCores(listaCorExemplo):
+    while True:
+        #mostraListaExemplo(lstCor)
+        print('\n----- Cor -----')
+        cor  = input('Digite a Cor que deseja cadastrar: ')
+        if len(cor) == 0 or len(cor)> 20:
+            print('Cor não digitada ou muito grande')
+        else:
+            listaCorExemplo.append(cor)
+            print('\n---------------------------------- LISTA ATUALIZADA --------------------------------------------------------')
+            mostraListaExemplo(listaCorExemplo)
+            break
+
+#################################################################################
+def guardaTxt(sapataria):
+    if(len(sapataria) != 0):
+        fileName = input('\nQual o nome do banco de dados deseja exportar?\nOu tecle [ENTER] para usar a padrão ')
+
+        if(len(fileName) > 0):
+            fileName = fileName + '.txt'
+        else:
+            fileName = 'dados.txt'
+        
+        
+
+        if(fileName != 'dados.txt'):
+            file1 = open(fileName,'w')
+        else:
+            if os.path.isfile('dados.txt'):
+                file1 = open('dados.txt', 'r')
+            else:
+                print('\nEsse banco de dados não existe ainda\nCopie uma banco de daos para a pasta\nOu crei um novo!!')
+                guardaTxt(sapataria)
+            
+        ind = 0    
+
+        for x in range(len(sapataria)):
+            file1.write(sapataria[x]['Modelo']+' '+str(sapataria[x]['Numeração'])+' '+str(sapataria[x]['Quantidade'])+' '+str(sapataria[x]['Valor'])+' '+sapataria[x]['Cor']+'\n')
+    
+            ind += 1
+
+        file1.close()
+        print('\n---------------------------------------------------------------------------------------------------------------------------')
+        print('--------------------------- Armazenado no TXT sucesso! -----------------------------------------------')
+        print('---------------------------------------------------------------------------------------------------------------------------\n')
+    
+    else:
+        print('\nNão existe item nas listas para armazenar no txt!\n')
+
+#################################################################################
+def recuperaTxt(sapataria):
+    sapato = dict()
+    fileName = input('\nQual o nome do banco de dados deseja importar?\nOu tecle [ENTER] para usar a padrão ')
+
+    if(len(fileName) > 0):
+        fileName = fileName + '.txt'
+    else:
+        fileName = 'dados.txt'
+
+    if(len(fileName) > 0):
+        dados = open(fileName,'r')
+    else:
+        if os.path.isfile('dados.txt'):
+            dados = open('dados.txt', 'r')
+        else:
+            print('\nEsse banco de dados não existe ainda\nCopie uma banco de daos para a pasta\nOu crei um novo!!')
+            recuperaTxt(sapataria)
+
+    #Efetua a leitura das linhas do arquivo
+    for line in dados.readlines():
+        #Quebra a linha lida em uma lista, a cada espaço encontrado é gerado um item na lista
+        sapato_item = line.strip().split(' ')
+        
+        sapato['Modelo']       = str(sapato_item[0])
+        sapato['Numeração'] = int(sapato_item[1])
+        sapato['Quantidade'] = int(sapato_item[2])
+        sapato['Valor']           = str(sapato_item[3])
+        sapato['Cor']              = str(sapato_item[4])
+
+        sapataria.append(sapato.copy())
+
+    print('\n---------------------------------------------------------------------------------------------------------------------------')
+    print('--------------------------- Importado do TXT com sucesso! --------------------------------------------')
+    print('---------------------------------------------------------------------------------------------------------------------------\n')
+    dados.close()
+        
+###  Execução ######################################################################
+while True:
+    escolha = lerInteiro(menu())
+
+    if escolha == 0:
+        print('\n----------------------------------------------------------------------------------------------------------------------------------')
+        print('____________ FIM _____________\n_______ Ate logo amigo! _______')
+        print('----------------------------------------------------------------------------------------------------------------------------------')
+        sys.exit()
         break
+    
+    elif escolha == 1:
+        print('\n----------------------------------------------------------------------------------------------------------------------------------')
+        print('----- Opcao 1 - Cadastro -----------')
+        print('----------------------------------------------------------------------------------------------------------------------------------')
+        cadastroTotal()
+        
+    elif escolha == 2:
+        print('\n----------------------------------------------------------------------------------------------------------------------------------')
+        print('----- Opcao 2 - Relatorio ----------')
+        print('----------------------------------------------------------------------------------------------------------------------------------')
+        relatorioGeral(sapataria)
+        
+    elif escolha == 3:
+        print('\n----------------------------------------------------------------------------------------------------------------------------------')
+        print('----- Opcao 3 - Realizar Venda -----')
+        print('----------------------------------------------------------------------------------------------------------------------------------')
+        realizarVenda(sapataria)
+        
+    elif escolha == 4:
+        print('\n----------------------------------------------------------------------------------------------------------------------------------')
+        print('----- Opcao 4 - Atualizar preços -----')
+        print('----------------------------------------------------------------------------------------------------------------------------------')
+        atulizaPreco(sapataria)
 
+        
+    elif escolha == 5:
+        print('\n----------------------------------------------------------------------------------------------------------------------------------')
+        print('----- Opcao 5 - Cadastrar Cores -----')
+        print('----------------------------------------------------------------------------------------------------------------------------------')
+        cadastrarCores(listaCorExemplo)
 
+    elif escolha == 6:
+        print('\n----------------------------------------------------------------------------------------------------------------------------------')
+        print('----- Opcao 5 - Cadastrar no TXT -----')
+        print('----------------------------------------------------------------------------------------------------------------------------------')
+        guardaTxt(sapataria)
 
+    elif escolha == 7:
+        print('\n----------------------------------------------------------------------------------------------------------------------------------')
+        print('----- Opcao 5 - Recuperar no TXT -----')
+        print('----------------------------------------------------------------------------------------------------------------------------------')
+        recuperaTxt(sapataria)
+
+    else:
+        print('Item do menu inexistente')
 
 
 
