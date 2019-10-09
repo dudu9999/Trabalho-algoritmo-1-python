@@ -49,12 +49,12 @@ Na opção 5, você deverá cadastrar as cores para poder escolher na hora de
 
 ###### variaveis e listas  ###################################################################
 ### Listas com dados
-lstModelo, lstCor = ['Tradicional','Esportivo','Caminhada','Corrida'],['Branco','Azul','Amarelo','Vermelho']
-lstNumeracao, lstQtd, lstValorUnit = [42,40,45,39],[20,10,25,15],[500,200,600,400]
+#lstModelo, lstCor = ['Tradicional','Esportivo','Caminhada','Corrida'],['Branco','Azul','Amarelo','Vermelho']
+#lstNumeracao, lstQtd, lstValorUnit = [42,40,45,39],[20,10,25,15],[500,200,600,400]
 
 ### Listas vazias 
-#lstModelo, lstCor = [],[]
-#lstNumeracao, lstQtd, lstValorUnit = [],[],[]
+lstModelo, lstCor = [],[]
+lstNumeracao, lstQtd, lstValorUnit = [],[],[]
 
 # listas de exemplo
 modeloExemplo = ['Tradicional','Esportivo','Caminhada','Corrida']
@@ -363,42 +363,28 @@ def addEstoque(lstQtd):
             print('Esse Tenis não existe\nDigite o numero que conste na lista')
             print('-------------------------------------------------------------------------------------------------------------------------------------------------------------')
 def guardaTxt(lstModelo, lstCor, lstNumeracao, lstQtd, lstValorUnit):
-    file1 = open("sapataria_dados.txt","w")
+    file1 = open("sapataria_dadossss.txt","w")
     ind = 0    
-
-### primeira forma    
-##    for x in range(len(lstModelo)):
-##        file1.write(' '+str(ind).center(5,' ')+ \
-##              lstModelo[x].center(23,' ')+ \
-##              str(lstNumeracao[x]).center(2,' ')+ \
-##              str(lstQtd[x]).center(2,' ')+ \
-##              str(lstValorUnit[x]).center(15,' ')+ \
-##              lstCor[x].center(15,' ')+'\n')
-##        ind += 1
 
     for x in range(len(lstModelo)):
         file1.write(lstModelo[x]+'\n')
         file1.write(str(lstNumeracao[x])+'\n')
         file1.write(str(lstQtd[x])+'\n')
         file1.write(str(lstValorUnit[x])+'\n')
-        file1.write(lstCor[x]+'\n')        
+        file1.write(lstCor[x]+'\n\n')        
         ind += 1
 
     
     file1.close()
 #################################################################################
 def recuperaTxt(lstModelo, lstCor, lstNumeracao, lstQtd, lstValorUnit):
-    dados = open('sapataria_dados.txt', 'r')
-##    x = 0
-##    for line in dados:
-##        print(line[x])
-##        x+=1
-##    dados.read()
+    dados = open('sapataria_dadossss.txt', 'r')
     
     x = 0
     for linha in dados:
         linha = linha.rstrip()
-        if x == 5:
+        print(linha)
+        if x == 6:
             x = 0
         if x == 0:
             lstModelo.append(linha)
@@ -411,17 +397,12 @@ def recuperaTxt(lstModelo, lstCor, lstNumeracao, lstQtd, lstValorUnit):
         if x == 4:
             lstCor.append(linha)
             
-            
         x+=1
     dados.close()
-        
-##        print(dados.readline())
-##        dados.readline(dados.write(lstModelo[x]))
-##        dados.write(str(lstNumeracao[x]))
-##        dados.write(str(lstQtd[x]))
-##        dados.write(str(lstValorUnit[x]))
-##        dados.write(lstCor[x])        
-##        x += 1
+
+
+
+
     
 #                      lstCor.append(listaCorExemplo[escolha])
 # list( ) # transforma em lista
