@@ -48,6 +48,9 @@ Na opção 5, você deverá cadastrar as cores para poder escolher na hora de
 '''
 
 ###### variaveis e listas  ###################################################################
+# Imports
+import os
+
 ### Listas com dados
 #lstModelo, lstCor = ['Tradicional','Esportivo','Caminhada','Corrida'],['Branco','Azul','Amarelo','Vermelho']
 #lstNumeracao, lstQtd, lstValorUnit = [42,40,45,39],[20,10,25,15],[500,200,600,400]
@@ -57,7 +60,7 @@ lstModelo, lstCor = [],[]
 lstNumeracao, lstQtd, lstValorUnit = [],[],[]
 
 # listas de exemplo
-modeloExemplo = ['Tradicional','Esportivo','Caminhada','Corrida']
+modeloExemplo = ('Tradicional','Esportivo','Caminhada','Corrida')
 listaCorExemplo = ['Branco','Preto','Azul','Amarelo','Vermelho','Verde','Rosa','Roxo']
 
 # Variaveis
@@ -137,7 +140,7 @@ def calculaPrecent(lstQtd,lstValorUnit):
     for x in lstQtd:
         per = per + lstQtd[ind] 
         ind+=1
-    per = (100*(lstQtd[possuiMais(lstQtd)] / per))
+    per = (100 * (lstQtd[ possuiMais( lstQtd ) ] / per ) )
     return per
 ### Função para mostrar qual tenis possui mais em estoque ######################################
 def possuiMais(lstQtd):
@@ -280,6 +283,7 @@ def relatorioGeral():
         print('          Total em Estoque R$:',total(lstQtd,lstValorUnit))
         print('O tenis '+lstModelo[possuiMais(lstQtd)],' é o que possui ',calculaPrecent(lstQtd,lstValorUnit),'% de todo o estoque!')
         print('E só o tenis ',lstModelo[possuiMais(lstQtd)],' que esta parado, possui o valor de  R$',lstQtd[possuiMais(lstQtd)]*lstValorUnit[possuiMais(lstQtd)],' de prejuizo!')
+        #print('possuiMais( lstQtd ):',possuiMais( lstQtd ) )
         print('-------------------------------------------------------------------------------------------------------------------------------------------------------------\n')
     else:
         print('\nLista vazia!')
@@ -342,6 +346,7 @@ def cadastrarCores():
             mostraListaExemplo(listaCorExemplo)
             break
 
+#################################################################################
 def addEstoque(lstQtd):
     mostraLista(lstModelo, lstCor, lstNumeracao, lstQtd, lstValorUnit)
     
@@ -362,51 +367,67 @@ def addEstoque(lstQtd):
             print('-------------------------------------------------------------------------------------------------------------------------------------------------------------')
             print('Esse Tenis não existe\nDigite o numero que conste na lista')
             print('-------------------------------------------------------------------------------------------------------------------------------------------------------------')
+
+#################################################################################
 def guardaTxt(lstModelo, lstCor, lstNumeracao, lstQtd, lstValorUnit):
-    file1 = open("sapataria_dadossss.txt","w")
-    ind = 0    
+    if(len(lstModelo) != 0):
+        
+        fileName = input("\nQual o nome do banco de dados deseja exportar?\nOu tecle [ENTER] para usar a padrão ")
+        fileName = fileName + ".txt"
 
-    for x in range(len(lstModelo)):
-        file1.write(lstModelo[x]+'\n')
-        file1.write(str(lstNumeracao[x])+'\n')
-        file1.write(str(lstQtd[x])+'\n')
-        file1.write(str(lstValorUnit[x])+'\n')
-        file1.write(lstCor[x]+'\n\n')        
-        ind += 1
+        if(fileName != ''):
+            file1 = open(fileName,"w")
+        else:
+            if os.path.isfile("sapataria_dados.txt"):
+                file1 = open("sapataria_dados.txt", "r")
+            else:
+                print('Esse banco de dados não existe!')
+                guardaTxt(lstModelo, lstCor, lstNumeracao, lstQtd, lstValorUnit)
+            
+        ind = 0    
 
+        for x in range(len(lstModelo)):
+            file1.write(lstModelo[x]+' '+str(lstNumeracao[x])+' '+str(lstQtd[x])+' '+str(lstValorUnit[x])+' '+lstCor[x]+'\n')
+            ind += 1
+
+        file1.close()
+        print('----- Armazenado no TXT sucesso! -----')
     
-    file1.close()
+    else:
+        print("\nNão existe item nas listas para armazenar no txt!\n")
+
 #################################################################################
 def recuperaTxt(lstModelo, lstCor, lstNumeracao, lstQtd, lstValorUnit):
-    dados = open('sapataria_dadossss.txt', 'r')
-    
-    x = 0
-    for linha in dados:
-        linha = linha.rstrip()
-        print(linha)
-        if x == 6:
-            x = 0
-        if x == 0:
-            lstModelo.append(linha)
-        if x == 1:
-            lstNumeracao.append(int(linha))
-        if x == 2:
-            lstQtd.append(int(linha))
-        if x == 3:
-            lstValorUnit.append(int(linha))
-        if x == 4:
-            lstCor.append(linha)
-            
-        x+=1
+    fileName = input("\nQual o nome do banco de dados deseja importar?\nOu tecle [ENTER] para usar a padrão ")
+    fileName = fileName + ".txt"
+
+    if(fileName != '.txt'):
+        dados = open(fileName,"r")
+    else:
+        if os.path.isfile("sapataria_dados.txt"):
+            dados = open("sapataria_dados.txt", "r")
+        else:
+            print('Esse banco de dados não existe!')
+            recuperaTxt(lstModelo, lstCor, lstNumeracao, lstQtd, lstValorUnit)
+
+        
+
+    #Efetua a leitura das linhas do arquivo
+    for line in dados.readlines():
+        #Quebra a linha lida em uma lista, a cada espaço encontrado é gerado um item na lista
+        sapato = line.strip().split(' ')
+        #print(sapato)
+        lstModelo.append(sapato[0])
+        lstNumeracao.append(int(sapato[1]))
+        lstQtd.append(int(sapato[2]))
+        lstValorUnit.append(float(sapato[3]))
+        lstCor.append(sapato[4])
+
+    print('----- Importado do TXT com sucesso! -----')
     dados.close()
 
-
-
-
     
-#                      lstCor.append(listaCorExemplo[escolha])
-# list( ) # transforma em lista
-# eval( ) # transforma em lista analisando melhor
+
 ###  Execução ######################################################################
 while True:
     escolha = lerInteiro(menu())
@@ -453,7 +474,6 @@ while True:
          print('----- Opcao 5 - Cadastrar no TXT -----')
          print('-------------------------------------------------------------------------------------------------------------------------------------------------------------\n')
          guardaTxt(lstModelo, lstCor, lstNumeracao, lstQtd, lstValorUnit)
-         print('----- Cadastrar no TXT sucesso! -----')
 
     elif escolha == 7:
          print('\n-------------------------------------------------------------------------------------------------------------------------------------------------------------')
