@@ -1,7 +1,6 @@
-# Trabalho 01 - Utilizando Listas
+# Trabalho - Utilizando Listas
 # Autor:  Eduardo Caetano
-# atualizar preço por modelo
-# se ja houver no dicionario
+
 
 '''
 Descrição do trabalho:
@@ -47,33 +46,6 @@ Na opção 4, você deverá localizar um produto e atualizar seu preço.
 
 Na opção 5, você deverá cadastrar as cores para poder escolher na hora de 
             cadastrar o estoque.
-
-            dados_dic = {}
-
-
-            a = input()
-
-            chave = (a + ' '+ b +' '+ c)
-
-             preco = input()
-            quant = input()
-
-            
-
-            lista_dados =[]
-
-            lista_dados.append(preco )
-            lista_dados.append(quant )
-            
-    
-            dados = {chave : lista_dados}            
-
-           
-            dados_dic.apend(dados)
-
-            [{'Esportivo - 23 - preto' : [120.00   , 5]}]
-
-
             
 '''
 
@@ -316,7 +288,7 @@ def relatorioGeral(sapataria):
     else:
         print('\nLista vazia!')
 
-### Função que calcula o total #############################################################
+### Função que calcula o total #######################################################################
 def total(sapataria):
     somaTotal = 0
     ind = 0
@@ -325,7 +297,7 @@ def total(sapataria):
         ind+=1
     return somaTotal
 
-### Função para calcular o percentual #######################################################
+### Função para calcular o percentual ################################################################
 def calculaPrecent(sapataria):
     per = 0
     ind = 0
@@ -336,7 +308,7 @@ def calculaPrecent(sapataria):
                           ]['Quantidade'] / per))
     return per
 
-### Função para mostrar qual tenis possui mais em estoque ######################################
+### Função para mostrar qual tenis possui mais em estoque ############################################
 def possuiMais(sapataria):
     ind = 0
     val_Atual = 0
@@ -348,7 +320,7 @@ def possuiMais(sapataria):
         ind+=1
     return indMaior # valor do indice do que possui mais no estoque
 
-### Realizar Venda ##############################################################################
+### Realizar Venda ##################################################################################
 def realizarVenda(sapataria):
     if len(sapataria) != 0:
         mostraLista(sapataria)
@@ -383,7 +355,7 @@ def realizarVenda(sapataria):
 def limpaItem(sapataria, escolha):
     sapataria.pop(escolha)
 
-### Função para atualizar o preço (Opção 4) ################################################
+### Função para atualizar o preço (Opção 4) #####################################################
 def atulizaPreco(sapataria):        
         if len(sapataria) != 0:
             mostraLista(sapataria)
@@ -428,7 +400,7 @@ def cadastrarCores(listaCorExemplo):
             mostraListaExemplo(listaCorExemplo)
             break
 
-### Função para adicionara mais sapatos no estoque se caso já existir ##################
+### Função para adicionara mais sapatos no estoque se caso já existir ########################
 def adicionarMaisQuantidade(sapataria, modelo, x):
     while True:
         
@@ -570,6 +542,8 @@ while True:
     else:
         print('Item do menu inexistente')
 
+        
+        
 ##########  Daqui pra baixo não ha mais nada! #######################################################
 
 
