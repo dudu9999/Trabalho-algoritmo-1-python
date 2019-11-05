@@ -1,4 +1,4 @@
-import Validacao
+import validacao
 import main
 
 class Cadastro:
@@ -32,17 +32,17 @@ def cadastroModelo():
 
 ### Função de cadastro Numeracao ##################################################################
 def cadastroNumeracao():
-    n = Validacao.lerInteiro("Numeração: ")
+    n = validacao.lerInteiro("Numeração: ")
     return n
 
 ### Função de cadastro Quantidade ##################################################################
 def cadastroQuantidade():
-    q = Validacao.lerInteiro("Quantidade: ")
+    q = validacao.lerInteiro("Quantidade: ")
     return q
 
 ### Função de cadastro Valor ##################################################################
 def cadastroValor():
-    v = Validacao.lerInteiro("Valor: ")
+    v = validacao.lerInteiro("Valor: ")
     return v
 
 ### Função de cadastro Cor ##################################################################
