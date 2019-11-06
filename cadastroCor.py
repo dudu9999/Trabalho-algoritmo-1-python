@@ -1,3 +1,2 @@
-class CadastroCor:
-    def __init__(self, cor):
-        self.__cor = cor
+def CadastroCor():
+    print('Metodo para cadastrar cor')

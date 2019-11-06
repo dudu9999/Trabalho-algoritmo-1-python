@@ -4,90 +4,52 @@ import os
 import sys
 # import struct
 
-import tenis
-from cadastro import Cadastro
+#import tenis
+from produto import Produto
 from cadastroCor import CadastroCor
 from atualizarPreco import AtualizarPreco
 from exportarTxt import ExportarTxt
 from importarTxt import ImportarTxt
-from relatorio import Relatorio
-from vender import Vender
-from validacao import Validacao
+import relatorio
+import vender
+import validacao
 
 ### Listas vazias
-listaTenis = []
+listaProdutos = []
 
-# Listas com dados
-
-# listas de exemplo
-listaModeloExemplo = ('Tradicional', 'Esportivo', 'Caminhada', 'Corrida')
-listaCorExemplo = ['Branco', 'Azul', 'Amarelo', 'Vermelho']
+####################################################################################
 
 
-# Variaveis
-
-### Função para mostra o menu ###################################################################
-def menu():
-    menu = '''
-------------------------------------------------------------------
-    Menu
-    0-  Sair
-    1-  Cadastrar Tenis
-    2-  Relatório Geral
-    3-  Realizar Venda
-    4-  Atualizar preços
-    5-  Cadastrar Cores
-    6-  Guarda no TXT
-    7-  Recupera do TXT
-    Escolha: '''
-    return menu
-
-### mostra a lista de exemplo ##############################################################
-def mostraListaExemplo(listaExemplo):
-    ind = 0
-    for x in listaExemplo:
-        print('  ' + str(ind) + ' - ' + listaExemplo[ind])
-        ind += 1
-    print('')
-############################################################################################
-self.__quantidade = quantidade
-self.__valor = valor
-############################################################################################
-
-############################################################################################
-
-
-
-
+####################################################################################
 ###  Execução ######################################################################
-###  Execução ######################################################################
+####################################################################################
 while True:
-    menu()
-    escolha = validacao.Validacao.lerInteiro('Mensagem')
+    validacao.menu()
+    escolha = validacao.lerInteiro()
 
     if escolha == 0:
-        print(
-            '\n----------------------------------------------------------------------------------------------------------------------------------')
+        print('\n----------------------------------------------------------------------------------------------------------------------------------')
         print('____________ FIM _____________\n_______ Ate logo amigo! _______')
-        print(
-            '----------------------------------------------------------------------------------------------------------------------------------')
+        print('----------------------------------------------------------------------------------------------------------------------------------')
         sys.exit()
         break
 
     elif escolha == 1:
-        print(
-            '\n----------------------------------------------------------------------------------------------------------------------------------')
+        print('\n----------------------------------------------------------------------------------------------------------------------------------')
         print('----- Opcao 1 - Cadastro -----------')
-        print(
-            '----------------------------------------------------------------------------------------------------------------------------------')
-        cadastro.Cadastro.cadastroTotal()
+        print('----------------------------------------------------------------------------------------------------------------------------------')
+        t = produto.Tenis()
+        t.tenis.set_modelo(validacao.validaCadastroModelo())
+        t.tenis.set_numeração(validacao.validaCadastroNumeracao())
+        t.tenis.set_cor(validacao.validaCadastroCor())
+        produto.set_produto(t)
+        produto = Produto()
+        produto.set_quantidade(validacao.validaCadastroQuantidade())
+        produto.set_valor(validacao.validaCadastroValor())
 
-#        try:
-#            Cadastro.cadastroTotal()
-#        except AttributeError:
-#            print("Não deu mermão!")
-#            raise Cadastro.cadastroTotal()
+        listaProdutos.append(produto)
 
+        #cadastroTotal()
 
     elif escolha == 2:
         print('\n----------------------------------------------------------------------------------------------------------------------------------')
@@ -129,24 +91,5 @@ while True:
         print('Item do menu inexistente')
 
 ##########  Daqui pra baixo não ha mais nada! #######################################################
-##########  Daqui pra baixo não ha mais nada! #######################################################
-##########  Daqui pra baixo não ha mais nada! #######################################################
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+#####################################################################################################
+#####################################################################################################
