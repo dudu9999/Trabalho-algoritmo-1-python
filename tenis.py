@@ -1,11 +1,9 @@
 
 ### Criação da Classe Tenis ###############################################
 class Tenis:
-    def __init__(self, modelo, numeração, quantidade, valor, cor):
+    def __init__(self, modelo, numeração, , cor):
         self.__modelo = modelo
         self.__numeração = numeração
-        self.__quantidade = quantidade
-        self.__valor = valor
         self.__cor = cor
 
     ### Os SETS ##################################################################
