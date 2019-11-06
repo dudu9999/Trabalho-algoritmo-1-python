@@ -2,17 +2,17 @@
 # Imports
 import os
 import sys
-import struct
+# import struct
 
 import tenis
-import cadastro
-import cadastroCor
-import atualizarPreco
-import exportarTxt
-import importarTxt
-import relatorio
-import vender
-import validacao
+from cadastro import Cadastro
+from cadastroCor import CadastroCor
+from atualizarPreco import AtualizarPreco
+from exportarTxt import ExportarTxt
+from importarTxt import ImportarTxt
+from relatorio import Relatorio
+from vender import Vender
+from validacao import Validacao
 
 ### Listas vazias
 listaTenis = []
@@ -54,7 +54,8 @@ def mostraListaExemplo(listaExemplo):
 ###  Execução ######################################################################
 ###  Execução ######################################################################
 while True:
-    escolha = validacao.Validacao.lerInteiro(menu())
+    menu()
+    escolha = validacao.Validacao.lerInteiro('Mensagem')
 
     if escolha == 0:
         print(
@@ -71,7 +72,7 @@ while True:
         print('----- Opcao 1 - Cadastro -----------')
         print(
             '----------------------------------------------------------------------------------------------------------------------------------')
-        cadastro.cadastroTotal()
+        cadastro.Cadastro.cadastroTotal()
 
 #        try:
 #            Cadastro.cadastroTotal()
