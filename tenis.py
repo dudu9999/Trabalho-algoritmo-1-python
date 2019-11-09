@@ -2,7 +2,7 @@ import validacao
 
 ### Criação da Classe Tenis ###############################################
 class Tenis:
-    def __init__(self, modelo , numeração, cor):
+    def __init__(self, modelo = None, numeração = None, cor = None):
         self.__modelo = modelo
         self.__numeração = numeração
         self.__cor = cor

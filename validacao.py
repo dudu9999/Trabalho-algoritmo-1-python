@@ -31,38 +31,59 @@ def mostraListaExemplo(listaExemplo):
     for x in listaExemplo:
         print('  ' + str(ind) + ' - ' + listaExemplo[ind])
         ind += 1
-    print('')
 
 def validaCadastroModelo():
+    print('-- Modelo --')
     mostraListaExemplo(listaModeloExemplo)
-    escolha = str(input("Modelo: "))
-    if escolha == '1':
-        modelo = 'Tradicional'
-    if escolha == '2':
-        modelo = 'Esportivo'
-    if escolha == '3':
-        modelo = 'Caminhada'
-    if escolha == '4':
-        modelo = 'Corrida'
-    return modelo
+    while True:
+        escolha = str(input("Escolha um: "))
+        if escolha == '1':
+            return 'Tradicional'
+        elif escolha == '2':
+            return 'Esportivo'
+        elif escolha == '3':
+            return 'Caminhada'
+        elif escolha == '4':
+            return 'Corrida'
+        else:
+            print('Item inexistente digite o numero do item acima.')
+
 
 ### Função de cadastro Numeracao ##################################################################
 def validaCadastroNumeracao():
-    n = lerInteiro("Numeração: ")
+    print()
+    print('-- Numeração --')
+    n = lerInteiro()
     return n
 
 ### Função de cadastro Quantidade ##################################################################
 def validaCadastroQuantidade():
-    q = lerInteiro("Quantidade: ")
+    print()
+    print('-- Quantidade --')
+    q = lerInteiro()
     return q
 
 ### Função de cadastro Valor ##################################################################
 def validaCadastroValor():
-    v = lerInteiro("Valor: ")
+    print()
+    print('-- Valor --')
+    v = lerInteiro()
     return v
 
 ### Função de cadastro Cor ##################################################################
 def validaCadastroCor():
+    print()
+    print('-- Cor --')
     mostraListaExemplo(listaCorExemplo)
-    c = input("Cor: ")
-    return c
+    while True:
+        escolha = str(lerInteiro())
+        if escolha == '1':
+            return 'Tradicional'
+        elif escolha == '2':
+            return 'Esportivo'
+        elif escolha == '3':
+            return 'Caminhada'
+        elif escolha == '4':
+            return 'Corrida'
+        else:
+            print('Item inexistente digite o numero do item acima.')

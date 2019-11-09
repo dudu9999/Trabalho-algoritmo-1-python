@@ -5,6 +5,7 @@ import sys
 # import struct
 
 #import tenis
+import tenis
 from produto import Produto
 from cadastroCor import CadastroCor
 from atualizarPreco import AtualizarPreco
@@ -38,14 +39,15 @@ while True:
         print('\n----------------------------------------------------------------------------------------------------------------------------------')
         print('----- Opcao 1 - Cadastro -----------')
         print('----------------------------------------------------------------------------------------------------------------------------------')
-        t = produto.Tenis()
-        t.tenis.set_modelo(validacao.validaCadastroModelo())
-        t.tenis.set_numeração(validacao.validaCadastroNumeracao())
-        t.tenis.set_cor(validacao.validaCadastroCor())
-        produto.set_produto(t)
-        produto = Produto()
-        produto.set_quantidade(validacao.validaCadastroQuantidade())
-        produto.set_valor(validacao.validaCadastroValor())
+        t = tenis.Tenis()
+        t.set_modelo(validacao.validaCadastroModelo())
+        t.set_numeração(validacao.validaCadastroNumeracao())
+        t.set_cor(validacao.validaCadastroCor())
+
+        prod = Produto()
+        prod.Produto.set_quantidade(validacao.validaCadastroQuantidade())
+        prod.set_valor(validacao.validaCadastroValor())
+        prod.set_tenis(t)
 
         listaProdutos.append(produto)
 
