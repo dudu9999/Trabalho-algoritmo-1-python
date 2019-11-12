@@ -67,7 +67,7 @@ while True:
 
     elif escolha == 7:
         validacao.menuEscolha(' Opcao 5 - Recuperar no TXT ')
-        # recuperaTxt()
+        importarTxt.ImportarTxt(listaProdutos)
 
     else:
         print('Item do menu inexistente')
