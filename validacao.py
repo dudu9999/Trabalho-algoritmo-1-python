@@ -36,18 +36,14 @@ def validaCadastroModelo():
     print('-- Modelo --')
     mostraListaExemplo(listaModeloExemplo)
     while True:
-        escolha = str(input("Escolha um: "))
-        if escolha == '1':
-            return 'Tradicional'
-        elif escolha == '2':
-            return 'Esportivo'
-        elif escolha == '3':
-            return 'Caminhada'
-        elif escolha == '4':
-            return 'Corrida'
-        else:
+        try:
+            escolha = lerInteiro()
+            if listaModeloExemplo[escolha] in listaModeloExemplo:
+                m = listaModeloExemplo[escolha]
+                return m
+                break
+        except:
             print('Item inexistente digite o numero do item acima.')
-
 
 ### Função de cadastro Numeracao ##################################################################
 def validaCadastroNumeracao():
@@ -76,14 +72,16 @@ def validaCadastroCor():
     print('-- Cor --')
     mostraListaExemplo(listaCorExemplo)
     while True:
-        escolha = str(lerInteiro())
-        if escolha == '1':
-            return 'Tradicional'
-        elif escolha == '2':
-            return 'Esportivo'
-        elif escolha == '3':
-            return 'Caminhada'
-        elif escolha == '4':
-            return 'Corrida'
-        else:
+        try:
+            escolha = lerInteiro()
+            if listaCorExemplo[escolha] in listaCorExemplo:
+                c = listaCorExemplo[escolha]
+                return c
+                break
+        except:
             print('Item inexistente digite o numero do item acima.')
+
+def menuEscolha(mensagem):
+    print('-'*100)
+    print('-'*5+mensagem+'-'*5)
+    print('-'*100)

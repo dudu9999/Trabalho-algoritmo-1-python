@@ -1,25 +1,24 @@
 ###### variaveis e listas  ###################################################################
 # Imports
-import os
 import sys
-# import struct
+import struct
 
-#import tenis
+import relatorio
 import tenis
 from produto import Produto
-from cadastroCor import CadastroCor
-from atualizarPreco import AtualizarPreco
-from exportarTxt import ExportarTxt
-from importarTxt import ImportarTxt
-import relatorio
+import cadastroCor
+import atualizarPreco
+import exportarTxt
+import importarTxt
 import vender
 import validacao
 
 ### Listas vazias
 listaProdutos = []
 
-####################################################################################
-
+### Variaveis
+x = 0
+espaco = 5
 
 ####################################################################################
 ###  Execução ######################################################################
@@ -29,65 +28,46 @@ while True:
     escolha = validacao.lerInteiro()
 
     if escolha == 0:
-        print('\n----------------------------------------------------------------------------------------------------------------------------------')
-        print('____________ FIM _____________\n_______ Ate logo amigo! _______')
-        print('----------------------------------------------------------------------------------------------------------------------------------')
+        validacao.menuEscolha(' Ate logo amigo! ')
         sys.exit()
-        break
 
     elif escolha == 1:
-        print('\n----------------------------------------------------------------------------------------------------------------------------------')
-        print('----- Opcao 1 - Cadastro -----------')
-        print('----------------------------------------------------------------------------------------------------------------------------------')
+        validacao.menuEscolha(' Opcao 1 - Cadastro ')
         t = tenis.Tenis()
         t.set_modelo(validacao.validaCadastroModelo())
-        t.set_numeração(validacao.validaCadastroNumeracao())
+        t.set_numeracao(validacao.validaCadastroNumeracao())
         t.set_cor(validacao.validaCadastroCor())
 
         prod = Produto()
-        prod.Produto.set_quantidade(validacao.validaCadastroQuantidade())
+        prod.set_quantidade(validacao.validaCadastroQuantidade())
         prod.set_valor(validacao.validaCadastroValor())
         prod.set_tenis(t)
 
-        listaProdutos.append(produto)
-
-        #cadastroTotal()
+        listaProdutos.append(prod)
 
     elif escolha == 2:
-        print('\n----------------------------------------------------------------------------------------------------------------------------------')
-        print('----- Opcao 2 - Relatorio ----------')
-        print('----------------------------------------------------------------------------------------------------------------------------------')
-        #relatorio.relatorioGeral()
+        validacao.menuEscolha(' Opcao 2 - Relatorio ')
+        relatorio.relatorioGeral(listaProdutos)
 
     elif escolha == 3:
-        print('\n----------------------------------------------------------------------------------------------------------------------------------')
-        print('----- Opcao 3 - Realizar Venda -----')
-        print('----------------------------------------------------------------------------------------------------------------------------------')
-        # realizarVenda(sapataria)
+        validacao.menuEscolha(' Opcao 3 - Realizar Venda ')
+        vender.realizarVenda(listaProdutos)
 
     elif escolha == 4:
-        print('\n----------------------------------------------------------------------------------------------------------------------------------')
-        print('----- Opcao 4 - Atualizar preços -----')
-        print('----------------------------------------------------------------------------------------------------------------------------------')
-        # atulizaPreco(sapataria)
+        validacao.menuEscolha(' Opcao 4 - Atualizar preços ')
+        atualizarPreco.atulizaPreco(listaProdutos)
 
     elif escolha == 5:
-        print('\n----------------------------------------------------------------------------------------------------------------------------------')
-        print('----- Opcao 5 - Cadastrar Cores -----')
-        print('----------------------------------------------------------------------------------------------------------------------------------')
-        # cadastrarCores(listaCorExemplo)
+        validacao.menuEscolha(' Opcao 5 - Cadastrar Cores ')
+        cadastroCor.cadastrarCores(validacao.listaCorExemplo)
 
     elif escolha == 6:
-        print('\n----------------------------------------------------------------------------------------------------------------------------------')
-        print('----- Opcao 5 - Cadastrar no TXT -----')
-        print('----------------------------------------------------------------------------------------------------------------------------------')
-        # guardaTxt(sapataria)
+        validacao.menuEscolha(' Opcao 5 - Cadastrar no TXT ')
+        exportarTxt.ExportarTxt(listaProdutos)
 
     elif escolha == 7:
-        print('\n----------------------------------------------------------------------------------------------------------------------------------')
-        print('----- Opcao 5 - Recuperar no TXT -----')
-        print('----------------------------------------------------------------------------------------------------------------------------------')
-        # recuperaTxt(sapataria)
+        validacao.menuEscolha(' Opcao 5 - Recuperar no TXT ')
+        # recuperaTxt()
 
     else:
         print('Item do menu inexistente')
