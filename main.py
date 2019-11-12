@@ -2,10 +2,10 @@
 # Imports
 import sys
 import struct
-
-import relatorio
-import tenis
 from produto import Produto
+import tenis
+import cadastroGeral
+import relatorio
 import cadastroCor
 import atualizarPreco
 import exportarTxt
@@ -15,10 +15,6 @@ import validacao
 
 ### Listas vazias
 listaProdutos = []
-
-### Variaveis
-x = 0
-espaco = 5
 
 ####################################################################################
 ###  Execução ######################################################################
@@ -33,17 +29,7 @@ while True:
 
     elif escolha == 1:
         validacao.menuEscolha(' Opcao 1 - Cadastro ')
-        t = tenis.Tenis()
-        t.set_modelo(validacao.validaCadastroModelo())
-        t.set_numeracao(validacao.validaCadastroNumeracao())
-        t.set_cor(validacao.validaCadastroCor())
-
-        prod = Produto()
-        prod.set_quantidade(validacao.validaCadastroQuantidade())
-        prod.set_valor(validacao.validaCadastroValor())
-        prod.set_tenis(t)
-
-        listaProdutos.append(prod)
+        cadastroGeral.CadastroGeral(listaProdutos)
 
     elif escolha == 2:
         validacao.menuEscolha(' Opcao 2 - Relatorio ')

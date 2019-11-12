@@ -43,7 +43,7 @@ def ImportarTxt(listaProdutos):
         prod.set_tenis(t)
 
         listaProdutos.append(prod)
-        x+=1
+        x += 1
 
     validacao.menuEscolha(' Importado do TXT com sucesso! ')
     dados.close()
