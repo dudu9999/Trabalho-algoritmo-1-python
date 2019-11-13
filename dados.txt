@@ -1,0 +1,4 @@
+Caminhada 40 Vermelho 100 1000
+Esportivo 42 Amarelo 50 300
+Corrida 44 Branco 20 150
+Tradicional Branco 44 20 150

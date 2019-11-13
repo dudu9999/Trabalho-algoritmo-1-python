@@ -85,3 +85,5 @@ def menuEscolha(mensagem):
     print('-'*100)
     print('-'*5+mensagem+'-'*5)
     print('-'*100)
+
+#validacao.menuEscolha(' Opcao 1 - Cadastro ')

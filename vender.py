@@ -16,7 +16,7 @@ def realizarVenda(listaProdutos):
             else:
                 print()
                 print('Quantos voce deseja vender: ')
-                quntidadeVenda = validacao.lerInteiro() # t.get_quantidade()
+                quntidadeVenda = validacao.lerInteiro()
                 if quntidadeVenda > int(listaProdutos[escolha].get_quantidade()) or quntidadeVenda <= 0:
                     print('Voce nao tem essa quantidade ou valor digitado esta errado!')
                 else:
