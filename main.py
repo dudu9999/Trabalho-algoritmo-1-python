@@ -1,3 +1,6 @@
+# Trabalho - Utilizando Listas
+# Autor:  Eduardo Caetano
+
 ###### variaveis e listas  ###################################################################
 # Imports
 import sys

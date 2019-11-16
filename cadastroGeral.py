@@ -1,3 +1,6 @@
+# Trabalho - Utilizando Listas
+# Autor:  Eduardo Caetano
+
 import tenis
 import validacao
 from produto import Produto

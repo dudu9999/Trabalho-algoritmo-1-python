@@ -1,3 +1,6 @@
+# Trabalho - Utilizando Listas
+# Autor:  Eduardo Caetano
+
 import validacao
 
 ### Criação da Classe Tenis ###############################################

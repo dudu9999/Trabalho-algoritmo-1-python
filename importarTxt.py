@@ -1,3 +1,6 @@
+# Trabalho - Utilizando Listas
+# Autor:  Eduardo Caetano
+
 ### Função que pega os dados de um txt e coloca na lista ###########################################################
 import os
 

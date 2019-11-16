@@ -1,8 +1,9 @@
-# import tenis
+# Trabalho - Utilizando Listas
+# Autor:  Eduardo Caetano
 
 ############################################################################################
 class Produto:
-    def __init__(self, quantidade=None, valor=None, tenis=None):
+    def __init__(self,quantidade = None,valor = None, tenis = None):
         self.__tenis = tenis
         self.__quantidade = quantidade
         self.__valor = valor

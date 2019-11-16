@@ -1,3 +1,6 @@
+# Trabalho - Utilizando Listas
+# Autor:  Eduardo Caetano
+
 ####Função que armazena o conteudo da lista em um arquivo TXT ########################
 import os
 import validacao

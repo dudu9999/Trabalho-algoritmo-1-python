@@ -1,3 +1,6 @@
+# Trabalho - Utilizando Listas
+# Autor:  Eduardo Caetano
+
 listaModeloExemplo = ('Tradicional', 'Esportivo', 'Caminhada', 'Corrida')
 listaCorExemplo = ['Branco', 'Azul', 'Amarelo', 'Vermelho']
 
@@ -13,16 +16,16 @@ def lerInteiro():
 ### Função para mostra o menu ###################################################################
 def menu():
     menu = '''
-------------------------------------------------------------------
-    Menu
-    0-  Sair
-    1-  Cadastrar Tenis
-    2-  Relatório Geral
-    3-  Realizar Venda
-    4-  Atualizar preços
-    5-  Cadastrar Cores
-    6-  Guarda no TXT
-    7-  Recupera do TXT'''
+------------------------------------------------------------
+ --- Menu ---
+ 0-  Sair
+ 1-  Cadastrar Tenis
+ 2-  Relatório Geral
+ 3-  Realizar Venda
+ 4-  Atualizar preços
+ 5-  Cadastrar Cores
+ 6-  Guarda no TXT
+ 7-  Recupera do TXT'''
     return print(menu)
 
 ### mostra a lista de exemplo ##############################################################
@@ -32,6 +35,7 @@ def mostraListaExemplo(listaExemplo):
         print('  ' + str(ind) + ' - ' + listaExemplo[ind])
         ind += 1
 
+### Função de cadastro de modelo ##################################################################
 def validaCadastroModelo():
     print('-- Modelo --')
     mostraListaExemplo(listaModeloExemplo)
@@ -50,21 +54,31 @@ def validaCadastroNumeracao():
     print()
     print('-- Numeração --')
     n = lerInteiro()
-    return n
+    if n >= 22 and n <= 46:
+        return n
+    else:
+        print('Erro - o numero digitado deve estar entre 22 e 46.')
 
 ### Função de cadastro Quantidade ##################################################################
 def validaCadastroQuantidade():
     print()
     print('-- Quantidade --')
-    q = lerInteiro()
-    return q
+    while True:
+        q = lerInteiro()
+        if q > 0:
+            return q
+        else:
+            print('Erro - a quantidade deve ser positiva.')
 
 ### Função de cadastro Valor ##################################################################
 def validaCadastroValor():
     print()
     print('-- Valor --')
     v = lerInteiro()
-    return v
+    if v > 0:
+        return v
+    else:
+        print('Erro - o valor deve ser positiva.')
 
 ### Função de cadastro Cor ##################################################################
 def validaCadastroCor():
@@ -77,13 +91,11 @@ def validaCadastroCor():
             if listaCorExemplo[escolha] in listaCorExemplo:
                 c = listaCorExemplo[escolha]
                 return c
-                break
         except:
             print('Item inexistente digite o numero do item acima.')
 
+### Função para mostrar mensagem formatada ##################################################################
 def menuEscolha(mensagem):
-    print('-'*100)
+    print('-'*60)
     print('-'*5+mensagem+'-'*5)
-    print('-'*100)
-
-#validacao.menuEscolha(' Opcao 1 - Cadastro ')
+    print('-'*60)

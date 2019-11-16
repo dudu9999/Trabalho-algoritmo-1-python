@@ -1,6 +1,8 @@
+# Trabalho - Utilizando Listas
+# Autor:  Eduardo Caetano
+
 import validacao
 import relatorio
-
 
 #############################################################
 def atulizaPreco(listaProdutos):
@@ -12,10 +14,10 @@ def atulizaPreco(listaProdutos):
             escolha = validacao.lerInteiro()
 
             if escolha > (len(listaProdutos) - 1) or escolha < 0:
-                print('-'*100)
+                print('-'*60)
                 print('-'*30+' Item escolhido fora da lista! '+'-'*30)
                 print('-'*30+'  digite o numero de um iten  que esteja na  lista! '+'-'*30)
-                print('-' * 100)
+                print('-' * 60)
             else:
                 print()
                 print('Qual o valor atualizado que deseja inserir')
@@ -28,7 +30,7 @@ def atulizaPreco(listaProdutos):
                     validacao.menuEscolha(' Preço atualizado com sucesso ')
 
                     print()
-                    print('-' * 60)
+                    print('-' * 50)
                     print('-' * 5 + ' LISTA ATUALIZADA ' + '-' * 5)
                     relatorio.relatorioGeral(listaProdutos)
                     break

@@ -1,3 +1,6 @@
+# Trabalho - Utilizando Listas
+# Autor:  Eduardo Caetano
+
 ### Realizar Venda ##############################################################################
 import validacao
 import relatorio
@@ -16,7 +19,7 @@ def realizarVenda(listaProdutos):
             else:
                 print()
                 print('Quantos voce deseja vender: ')
-                quntidadeVenda = validacao.lerInteiro()
+                quntidadeVenda = validacao.lerInteiro() # t.get_quantidade()
                 if quntidadeVenda > int(listaProdutos[escolha].get_quantidade()) or quntidadeVenda <= 0:
                     print('Voce nao tem essa quantidade ou valor digitado esta errado!')
                 else:
